@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Answer Benchmark V2 Case",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "case_id",
+    "query",
+    "language",
+    "companies",
+    "intent_family",
+    "answer_mode",
+    "expected_task_type",
+    "expected_dimensions",
+    "required_evidence_types",
+    "expected_tools",
+    "report_expected",
+    "must_include_caveats",
+    "forbidden_claims",
+    "comparison_balance_required",
+    "expected_contract_status"
+  ],
+  "properties": {
+    "case_id": { "type": "string", "minLength": 1 },
+    "query": { "type": "string", "minLength": 1 },
+    "language": { "type": "string", "enum": ["zh", "en", "mixed"] },
+    "companies": { "type": "array", "items": { "type": "string" } },
+    "intent_family": { "type": "string", "minLength": 1 },
+    "answer_mode": { "type": "string", "minLength": 1 },
+    "expected_task_type": { "type": "string", "minLength": 1 },
+    "expected_dimensions": { "type": "array", "items": { "type": "string" } },
+    "required_evidence_types": { "type": "array", "items": { "type": "string" } },
+    "expected_tools": { "type": "array", "items": { "type": "string" } },
+    "report_expected": { "type": "boolean" },
+    "must_include_caveats": { "type": "boolean" },
+    "forbidden_claims": { "type": "array", "items": { "type": "string" } },
+    "comparison_balance_required": { "type": "boolean" },
+    "expected_contract_status": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}

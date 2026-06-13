@@ -1,0 +1,122 @@
+# Ticker registry aligned with config.target_tickers — used to seed DuckDB companies table.
+companies:
+  - ticker: AAPL
+    company_name: Apple Inc.
+    sector: Technology
+    cik: "0000320193"
+  - ticker: MSFT
+    company_name: Microsoft Corporation
+    sector: Technology
+    cik: "0000789019"
+  - ticker: NVDA
+    company_name: NVIDIA Corporation
+    sector: Technology
+    cik: "0001045810"
+  - ticker: GOOGL
+    company_name: Alphabet Inc.
+    sector: Technology
+    cik: "0001652044"
+  - ticker: AMZN
+    company_name: Amazon.com Inc.
+    sector: Consumer Cyclical
+    cik: "0001018724"
+  - ticker: TSLA
+    company_name: Tesla Inc.
+    sector: Consumer Cyclical
+    cik: "0001318605"
+  - ticker: JPM
+    company_name: JPMorgan Chase & Co.
+    sector: Financial Services
+    cik: "0000019617"
+  - ticker: JNJ
+    company_name: Johnson & Johnson
+    sector: Healthcare
+    cik: "0000200406"
+  - ticker: META
+    company_name: Meta Platforms Inc.
+    sector: Technology
+    cik: "0001326801"
+  - ticker: AMD
+    company_name: Advanced Micro Devices Inc.
+    sector: Technology
+    cik: "0000002488"
+  - ticker: INTC
+    company_name: Intel Corporation
+    sector: Technology
+    cik: "0000050863"
+  - ticker: AVGO
+    company_name: Broadcom Inc.
+    sector: Technology
+    cik: "0001730168"
+  - ticker: QCOM
+    company_name: QUALCOMM Incorporated
+    sector: Technology
+    cik: "0000804328"
+  - ticker: ORCL
+    company_name: Oracle Corporation
+    sector: Technology
+    cik: "0001341439"
+  - ticker: CRM
+    company_name: Salesforce Inc.
+    sector: Technology
+    cik: "0001108524"
+  - ticker: ADBE
+    company_name: Adobe Inc.
+    sector: Technology
+    cik: "0000796343"
+  - ticker: NOW
+    company_name: ServiceNow Inc.
+    sector: Technology
+    cik: "0001373715"
+  - ticker: COST
+    company_name: Costco Wholesale Corporation
+    sector: Consumer Defensive
+    cik: "0000909832"
+  - ticker: WMT
+    company_name: Walmart Inc.
+    sector: Consumer Defensive
+    cik: "0000104169"
+  - ticker: NKE
+    company_name: NIKE Inc.
+    sector: Consumer Cyclical
+    cik: "0000320187"
+  - ticker: MCD
+    company_name: McDonald's Corporation
+    sector: Consumer Cyclical
+    cik: "0000063908"
+  - ticker: BAC
+    company_name: Bank of America Corporation
+    sector: Financial Services
+    cik: "0000070858"
+  - ticker: GS
+    company_name: The Goldman Sachs Group Inc.
+    sector: Financial Services
+    cik: "0000886982"
+  - ticker: MS
+    company_name: Morgan Stanley
+    sector: Financial Services
+    cik: "0000895421"
+  - ticker: V
+    company_name: Visa Inc.
+    sector: Financial Services
+    cik: "0001403161"
+  - ticker: PFE
+    company_name: Pfizer Inc.
+    sector: Healthcare
+    cik: "0000078003"
+  - ticker: UNH
+    company_name: UnitedHealth Group Incorporated
+    sector: Healthcare
+    cik: "0000731766"
+  - ticker: MRK
+    company_name: Merck & Co. Inc.
+    sector: Healthcare
+    cik: "0000310158"
+  - ticker: LLY
+    company_name: Eli Lilly and Company
+    sector: Healthcare
+    cik: "0000059478"
+  - ticker: XOM
+    company_name: Exxon Mobil Corporation
+    sector: Energy
+    cik: "0000034088"

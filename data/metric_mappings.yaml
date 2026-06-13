@@ -1,0 +1,161 @@
+metrics:
+  revenue:
+    unit: USD
+    tags:
+      - RevenueFromContractWithCustomerExcludingAssessedTax
+      - Revenues
+      - SalesRevenueNet
+      - SalesRevenueGoodsNet
+      - SalesRevenueServicesNet
+  net_income:
+    unit: USD
+    tags:
+      - NetIncomeLoss
+      - ProfitLoss
+  eps:
+    unit: USD_per_share
+    sec_units:
+      - USD/shares
+      - USD/shares-basic
+    tags:
+      - EarningsPerShareDiluted
+      - EarningsPerShareBasic
+  gross_profit:
+    unit: USD
+    tags:
+      - GrossProfit
+  operating_income:
+    unit: USD
+    tags:
+      - OperatingIncomeLoss
+  operating_cash_flow:
+    unit: USD
+    tags:
+      - NetCashProvidedByUsedInOperatingActivities
+      - NetCashProvidedByUsedInOperatingActivitiesContinuingOperations
+  capital_expenditure:
+    unit: USD
+    value_transform: abs
+    tags:
+      - PaymentsToAcquirePropertyPlantAndEquipment
+      - PaymentsToAcquireProductiveAssets
+  cash_and_equivalents:
+    unit: USD
+    tags:
+      - CashAndCashEquivalentsAtCarryingValue
+      - CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents
+      - CashCashEquivalentsAndShortTermInvestments
+  short_term_debt:
+    unit: USD
+    tags:
+      - DebtCurrent
+      - ShortTermBorrowings
+      - ShortTermDebt
+      - ShortTermDebtCurrent
+  long_term_debt:
+    unit: USD
+    tags:
+      - LongTermDebt
+      - LongTermDebtNoncurrent
+      - LongTermDebtAndFinanceLeaseObligationsNoncurrent
+  total_assets:
+    unit: USD
+    tags:
+      - Assets
+  total_liabilities:
+    unit: USD
+    tags:
+      - Liabilities
+      - LiabilitiesCurrent
+  shareholders_equity:
+    unit: USD
+    tags:
+      - StockholdersEquity
+      - StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest
+  receivables:
+    unit: USD
+    tags:
+      - AccountsReceivableNetCurrent
+      - ReceivablesNetCurrent
+  inventory:
+    unit: USD
+    tags:
+      - InventoryNet
+  shares_outstanding:
+    unit: shares
+    sec_units:
+      - shares
+    tags:
+      - EntityCommonStockSharesOutstanding
+  total_debt:
+    unit: USD
+    derived:
+      operation: sum
+      left: short_term_debt
+      right: long_term_debt
+  free_cash_flow:
+    unit: USD
+    derived:
+      operation: difference
+      left: operating_cash_flow
+      right: capital_expenditure
+  gross_margin:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: gross_profit
+      denominator: revenue
+  operating_margin:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: operating_income
+      denominator: revenue
+  net_margin:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: net_income
+      denominator: revenue
+  cash_conversion:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: operating_cash_flow
+      denominator: net_income
+  cfo_to_net_income:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: operating_cash_flow
+      denominator: net_income
+  fcf_margin:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: free_cash_flow
+      denominator: revenue
+  debt_to_equity:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: total_debt
+      denominator: shareholders_equity
+  capex_to_revenue:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: capital_expenditure
+      denominator: revenue
+  receivables_to_revenue:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: receivables
+      denominator: revenue
+  inventory_to_revenue:
+    unit: ratio
+    derived:
+      operation: ratio
+      numerator: inventory
+      denominator: revenue

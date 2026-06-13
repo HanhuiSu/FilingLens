@@ -1,0 +1,78 @@
+[project]
+name = "filinglens"
+version = "0.1.0"
+description = "FilingLens – evidence-grounded analysis over SEC filings and structured financial data"
+requires-python = ">=3.10"
+dependencies = [
+    # ---------- LLM / Agent ----------
+    "langgraph>=0.4",
+    "langchain>=0.3",
+    "langchain-openai>=0.3",
+    "langchain-community>=0.3",
+
+    # ---------- Embedding ----------
+    "sentence-transformers>=3.4",
+
+    # ---------- Vector store ----------
+    "chromadb>=0.6",
+
+    # ---------- Structured DB ----------
+    "duckdb>=1.2",
+
+    # ---------- Data acquisition ----------
+    "sec-edgar-downloader>=5.0",
+    "yfinance>=0.2",
+
+    # ---------- Document parsing ----------
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "tiktoken>=0.9",
+
+    # ---------- Web framework ----------
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+
+    # ---------- Config & utils ----------
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "httpx>=0.28",
+    "structlog>=24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.25",
+    "ruff>=0.9",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "unit: fast tests that do not require local services or large data assets",
+    "integration: tests that exercise local data stores or multiple modules",
+    "e2e: end-to-end tests that exercise the assembled agent or API",
+    "slow: tests that may take materially longer than unit tests",
+    "requires_llm: requires a running local vLLM/OpenAI-compatible model server",
+    "requires_embedding: requires the local embedding model to be available",
+    "requires_vectorstore: requires a populated Chroma vectorstore",
+    "requires_api: requires a running FastAPI service",
+    "timeout: documents an intended timeout budget when pytest-timeout is not installed",
+]

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FilingLens Console</title>
+  <link rel="stylesheet" href="./styles.css?v=20260603-title-fit" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero console-shell">
+      <div>
+        <h1>FilingLens: Evidence-Grounded RAG Agent</h1>
+        <p>A financial analysis agent for U.S. public companies, designed to help users understand a company faster. Users can ask natural-language questions about fundamentals, cash flow, valuation, risks, or business models, and receive evidence-backed analytical answers with citations and clear limitations.</p>
+      </div>
+      <div class="hero-status" aria-label="System status">
+        <span class="status-dot"></span>
+        <span>Live API Channel</span>
+        <span id="healthStatus" class="badge neutral">Unknown</span>
+      </div>
+    </header>
+
+    <aside class="control-stack">
+      <section class="panel query-panel" aria-labelledby="chat-heading">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Analyst Query</p>
+            <h2 id="chat-heading">研究指令</h2>
+          </div>
+        </div>
+        <label for="queryInput">Query</label>
+        <textarea
+          id="queryInput"
+          rows="8"
+          placeholder="例：分析 NVIDIA 的现金流质量、估值边界和主要风险。"
+        ></textarea>
+        <div class="row actions">
+          <button id="sendBtn" type="button">运行分析</button>
+          <span id="chatStatus" class="hint"></span>
+        </div>
+      </section>
+
+      <section class="panel progress-panel" aria-labelledby="progress-heading">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Live Run Monitor</p>
+            <h2 id="progress-heading">分析进度</h2>
+          </div>
+          <span id="progressStatusBadge" class="badge neutral">Standby</span>
+        </div>
+        <div class="progress-meter" aria-hidden="true">
+          <span id="progressMeterFill"></span>
+        </div>
+        <div class="progress-copy" aria-live="polite">
+          <div>
+            <strong id="progressCurrentTitle">等待研究指令</strong>
+            <span id="progressElapsed">00:00</span>
+          </div>
+          <p id="progressNarrative">提交问题后，这里会显示当前分析正在推进到哪一步。</p>
+        </div>
+        <ol id="progressStageList" class="progress-stage-list">
+          <li class="pending"><span>Intent</span><strong>等待问题进入分析队列。</strong></li>
+        </ol>
+        <ul id="progressActivityLog" class="progress-activity">
+          <li>系统空闲，等待新的研究任务。</li>
+        </ul>
+      </section>
+
+      <section class="panel meta-panel" aria-label="Response metadata">
+        <p class="eyebrow">Response Telemetry</p>
+        <div class="meta">
+          <div><strong>Task Type</strong><span id="taskType">-</span></div>
+          <div><strong>Tools</strong><span id="usedTools">-</span></div>
+        </div>
+        <div class="meta-footer"><strong>Trace ID</strong><span id="traceIdText">-</span></div>
+      </section>
+    </aside>
+
+    <section class="panel analysis-panel" aria-labelledby="answer-heading">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Evidence-Grounded Analysis</p>
+          <h2 id="answer-heading">核心研判</h2>
+        </div>
+      </div>
+      <div id="outputView" class="output-view empty">No structured output yet.</div>
+      <details class="advanced-debug debug-muted">
+        <summary>Advanced / Debug</summary>
+        <details class="legacy-answer">
+          <summary>Debug: Legacy Fallback</summary>
+          <div id="answerText" class="answer-body empty">No response yet.</div>
+        </details>
+      </details>
+    </section>
+
+    <section class="panel evidence-panel" aria-labelledby="citation-heading">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Source Evidence Matrix</p>
+          <h2 id="citation-heading">证据矩阵</h2>
+        </div>
+      </div>
+      <div class="evidence-grid">
+        <section class="evidence-card">
+          <h3>Numeric Evidence</h3>
+          <ul id="numericEvidenceList" class="list">
+            <li class="empty">No numeric evidence yet.</li>
+          </ul>
+        </section>
+        <section class="evidence-card">
+          <h3>Text Evidence</h3>
+          <ul id="textEvidenceList" class="list">
+            <li class="empty">No text evidence yet.</li>
+          </ul>
+        </section>
+      </div>
+      <section class="limitations-block evidence-card">
+        <h3>Limitations</h3>
+        <ul id="limitationsList" class="list">
+          <li class="empty">No limitations reported yet.</li>
+        </ul>
+      </section>
+      <details class="advanced-debug debug-muted">
+        <summary>Advanced / Debug</summary>
+        <details class="legacy-citations">
+          <summary>Legacy Citations (fallback)</summary>
+          <ul id="citationsList" class="list">
+            <li class="empty">No citations yet.</li>
+          </ul>
+        </details>
+      </details>
+    </section>
+
+    <section class="panel trace-panel" aria-labelledby="trace-heading">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Audit Trace</p>
+          <h2 id="trace-heading">审计链路</h2>
+        </div>
+      </div>
+      <div class="trace-control">
+        <div class="row">
+          <label for="traceInput">Trace ID</label>
+          <input id="traceInput" type="text" placeholder="Paste trace id here" />
+        </div>
+        <div class="row actions">
+          <button id="traceBtn" type="button">复制摘要</button>
+          <button id="debugBundleBtn" type="button" class="secondary">Copy Debug Bundle</button>
+          <span id="copyTraceStatus" class="hint"></span>
+        </div>
+      </div>
+      <div id="traceAudit" class="trace-audit empty">
+        <div class="trace-tabs" role="tablist" aria-label="Trace audit tabs">
+          <button class="trace-tab active" type="button" data-trace-tab="workflow">Workflow</button>
+          <button class="trace-tab" type="button" data-trace-tab="research">ResearchPlan</button>
+          <button class="trace-tab" type="button" data-trace-tab="plan">EvidencePlan</button>
+          <button class="trace-tab" type="button" data-trace-tab="packet">EvidencePacket</button>
+          <button class="trace-tab" type="button" data-trace-tab="dimensions">Dimensions</button>
+          <button class="trace-tab" type="button" data-trace-tab="citations">Citations</button>
+          <button class="trace-tab" type="button" data-trace-tab="contract">Contract</button>
+          <button class="trace-tab" type="button" data-trace-tab="report">Report</button>
+        </div>
+        <div id="traceTabContent" class="trace-tab-content"></div>
+      </div>
+      <pre id="traceSummary" class="pre">No trace loaded.</pre>
+      <details class="advanced-debug debug-muted">
+        <summary>Sanitized Trace UI JSON</summary>
+        <pre id="traceJson" class="pre"></pre>
+      </details>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script src="./app.js?v=20260519-progress2" type="module"></script>
+</body>
+</html>

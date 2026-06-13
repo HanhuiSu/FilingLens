@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments and local secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+.venv/
+.venv*/
+venv/
+
+# Local app state and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local logs, caches, and scratch
+logs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.codex
+.codex/
+.agents/
+tmp/
+scratch/
+
+# Data runtime artifacts
+data/raw/*
+data/processed/*
+data/chunks/*
+data/vectorstore/*
+data/db/*
+data/traces/*
+data/reports/
+data/vectorstore_build*.log
+!data/**/.gitkeep
+!data/companies.yaml
+!data/metric_mappings.yaml
+
+# Eval and manual probe outputs
+eval/results/
+eval/report.json
+eval/*_report.json
+eval/*_report.md
+eval/*_failures.jsonl
+eval/**/debug_report.md
+eval/**/user_report.md
+eval/**/summary.json
+eval/**/bundles/
+
+# Archived baseline source directory is intentionally emptied after cleanup.
+baseline/
+
+# Generated reports and debug bundles
+*_debug_report.md
+*_user_report.md
+debug_bundle*/
+report_bundle*/
