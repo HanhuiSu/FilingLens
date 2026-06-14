@@ -3,7 +3,7 @@
 """Eval runner — execute benchmark, compute metrics, output report.
 
 Usage:
-  PYTHONPATH=/home/hui/agent python eval/run_eval.py [OPTIONS]
+  PYTHONPATH=. python eval/run_eval.py [OPTIONS]
 
 Options:
   --benchmark PATH    Path to benchmark JSONL (default: eval/benchmark.jsonl)

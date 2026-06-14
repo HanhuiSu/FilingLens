@@ -7,7 +7,7 @@ Requires:
   - ChromaDB vectorstore at data/vectorstore/
 
 Usage:
-  PYTHONPATH=/home/hui/agent python scripts/test_agent_e2e.py
+  PYTHONPATH=. python scripts/test_agent_e2e.py
 """
 
 from __future__ import annotations
